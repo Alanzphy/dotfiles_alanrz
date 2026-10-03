@@ -1,0 +1,14 @@
+# Paths here are target paths (relative to $HOME), not source names.
+
+{{ if ne .chezmoi.os "linux" }}
+# Linux-only (Omarchy / Hyprland / GNOME)
+.config/hypr
+.local/share/dbus-1
+{{ end }}
+
+{{ if ne .chezmoi.os "darwin" }}
+# macOS-only
+Library
+.config/aerospace
+.config/karabiner
+{{ end }}
