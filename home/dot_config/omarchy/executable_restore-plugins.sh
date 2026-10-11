@@ -5,11 +5,8 @@ set -euo pipefail
 SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MANIFEST="${1:-$SELF_DIR/plugin-manifest.json}"
 
-# Vendored (non-git) plugins: just copy them back into place
-if [ -d "$SELF_DIR/plugins/io.github.thisisgm.flea-shelf" ]; then
-  mkdir -p ~/.config/omarchy/plugins
-  cp -r "$SELF_DIR/plugins/io.github.thisisgm.flea-shelf" ~/.config/omarchy/plugins/
-fi
+# Packages implemented noted in plugin-manifest.json (Package key) are restored with
+# omarchy pkgs, e.g. flea-bin ships flea-shelf (the file manager shelf plugin).
 
 while IFS=$'\t' read -r pid url; do
   [ -n "$url" ] || continue

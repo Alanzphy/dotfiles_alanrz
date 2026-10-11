@@ -48,8 +48,8 @@
     },
     {
       "id": "io.github.thisisgm.flea-shelf",
-      "git": null,
-      "enabled": false
+      "enabled": false,
+      "package": "flea-bin"
     },
     {
       "id": "io.github.twiking.omasettings",
