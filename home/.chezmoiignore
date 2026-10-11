@@ -16,3 +16,6 @@ Library
 .config/aerospace
 .config/karabiner
 {{ end }}
+
+# Credentials live here, not versioned (API keys for ai-usagebar):
+.config/hypr/envs.lua
