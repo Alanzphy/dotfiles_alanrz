@@ -1,0 +1,13 @@
+[Unit]
+Description=Raise waywallen wallpaper layer above omarchy shell background
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.config/systemd/user/wallpaper-layer-top.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target
