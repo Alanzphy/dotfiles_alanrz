@@ -18,7 +18,7 @@ gtk-toolbar-style = flat
 cursor-style = "block"
 cursor-style-blink = false
 
-# Animated cursor sweep trail
+# Animated cursor sweep trail (sahaj-b/cursor-shaders)
 custom-shader = shaders/cursor_tail.glsl
 custom-shader-animation = true
 
