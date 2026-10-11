@@ -1,0 +1,80 @@
+{
+  "$comment": "omarchy plugins manifest \u2014 restore: ./restore-plugins.sh",
+  "plugins": [
+    {
+      "id": "ajkulundu.mediaplusplus",
+      "git": "https://github.com/AJ-Kulundu/mediaplusplus.git",
+      "enabled": true
+    },
+    {
+      "id": "akitaonrails.ai-usagebar",
+      "git": "https://github.com/akitaonrails/ai-usagebar.git",
+      "enabled": true
+    },
+    {
+      "id": "b.everything",
+      "git": "https://github.com/brianblakely/omarchy-everything.git",
+      "enabled": false
+    },
+    {
+      "id": "bibek.media",
+      "git": "https://github.com/bibekbhusal0/omarchy-better-media",
+      "enabled": false
+    },
+    {
+      "id": "crmne.mpris",
+      "git": "https://github.com/crmne/omarchy-mpris",
+      "enabled": false
+    },
+    {
+      "id": "io.github.diegopluna.argus",
+      "git": "https://github.com/diegopluna/omarchy-argus",
+      "enabled": true
+    },
+    {
+      "id": "io.github.inxeo.isles",
+      "git": "https://github.com/Inxeo/omarchy-isles.git",
+      "enabled": true
+    },
+    {
+      "id": "io.github.juancasanueva.plugin-manager",
+      "git": "https://github.com/juancasanueva/omarchy-plugin-manager",
+      "enabled": true
+    },
+    {
+      "id": "io.github.kristoferlund.webcam",
+      "git": "https://github.com/kristoferlund/omarchy-webcam",
+      "enabled": false
+    },
+    {
+      "id": "io.github.thisisgm.flea-shelf",
+      "git": null,
+      "enabled": false
+    },
+    {
+      "id": "io.github.twiking.omasettings",
+      "git": "https://github.com/twiking/omasettings.git",
+      "enabled": true
+    },
+    {
+      "id": "io.github.tyrichards.tray",
+      "git": "https://github.com/tyrichards/omarchy-tray",
+      "enabled": true
+    },
+    {
+      "id": "macos.dock",
+      "git": "https://github.com/ifubaraboye/omarchy-dock.git",
+      "enabled": true
+    },
+    {
+      "id": "stappmus.activity-monitor",
+      "git": "https://github.com/stappmus/omarchy-activity-monitor.git",
+      "enabled": false
+    },
+    {
+      "id": "tornikegomareli.spaces",
+      "git": "https://github.com/tornikegomareli/omarchy-spaces",
+      "enabled": true
+    }
+  ]
+}
