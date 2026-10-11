@@ -1,0 +1,109 @@
+[global]
+last_wallpaper = "25"
+queue_mode = "sequential"
+rotation_secs = 0
+audio_fade_ms = 500
+mute_when_other_audio = false
+audio_capture_enabled = false
+manual_muted = false
+wallpaper_filter_json = '{"filters":[],"filter_logics":[]}'
+wallpaper_sorts = []
+wallpaper_skip_types = []
+wallpaper_filter_tags = []
+wallpaper_skip_content_ratings = []
+wallpaper_hidden_filter = "exclude"
+plugin_update_notifications = true
+duplicate_renderers_for_same_wallpaper = false
+pointer_forwarding_enabled = true
+autostart_enabled = false
+hide_tray_icon = false
+debug_logging_enabled = false
+
+[global.renderer]
+enable_audio = false
+volume = 100
+
+[global.layout]
+fillmode = "preserve_aspect_crop"
+align = "center"
+rotation = "normal"
+
+[global.layout.location]
+x = 50
+y = 50
+
+[global.auto_replay]
+any_window_scope = "current_display"
+focused_scope = "current_display"
+maximized_scope = "all_displays"
+fullscreen_scope = "all_displays"
+any_window = "none"
+focused = "none"
+maximized = "pause"
+fullscreen = "pause"
+session_locked = "stop"
+session_inactive = "stop"
+gamemode = "pause"
+resume_delay_ms = 250
+
+[global.auto_replay.window_exclusions]
+application_ids = []
+titles = []
+application_id_patterns = []
+title_patterns = []
+
+[global.pause_effect]
+kind = "none"
+
+[global.pause_effect.blur]
+radius = 30
+
+[global.transition]
+kind = "fade"
+duration_ms = 500
+angle = 0
+
+[global.transition.origin]
+x = 50
+y = 50
+
+[plugin.waywallen-image]
+fps = "30"
+resolution = "0"
+render_node = ""
+
+[plugin.waywallen-video]
+render_node = ""
+volume = "100"
+fps = "30"
+resolution = "0"
+loop_file = "inf"
+hwdec = "auto"
+enable_audio = "false"
+
+[plugin.wescene-renderer]
+resolution = "2"
+hwdec = "auto"
+fps = "30"
+enable_audio = "false"
+volume = "100"
+render_node = ""
+msaa = "1"
+custom_extent = "1080"
+
+[plugin.weweb-renderer]
+shared_texture_enabled = "true"
+render_node = ""
+volume = "100"
+remote_debugging_port = "0"
+enable_audio = "false"
+resolution = "2"
+fps = "30"
+
+[display.layer-baa2fee4ddfef4c32ab5eea915f487f3]
+last_wallpaper = "25"
+
+[display.layer-ea12ed3717a8ff63b67f0b59bb76ea56]
+last_wallpaper = "25"
+
+[canvas]

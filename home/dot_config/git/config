@@ -1,0 +1,79 @@
+# See https://git-scm.com/docs/git-config
+
+[user]
+	name = Alan Ruiz
+	email = alanzphy@gmail.com
+#	signingkey = /home/alanz/.ssh/ssh-github.pub
+
+[init]
+	defaultBranch = main
+
+[alias]
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset)%C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	s = status --short --branch
+	shove = push --force-with-lease --force-if-includes
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+
+[status]
+	branch = true
+	showStash = true
+
+[pull]
+	rebase = true                 # Rebase (instead of merge) on pull
+	default = current
+	followTags = true
+
+[push]
+	autoSetupRemote = true        # Automatically set upstream branch on push
+	default = current
+
+[fetch]
+	prune = true
+
+[diff]
+	algorithm = histogram         # Clearer diffs on moved/edited lines
+	colorMoved = plain            # Highlight moved blocks in diffs
+	mnemonicPrefix = true         # More intuitive refs in diff output
+
+[commit]
+	verbose = true                # Include diff comment in commit message template
+
+[column]
+	ui = auto                     # Output in columns when possible
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = -version:refname
+
+[rerere]
+	enabled = true                # Record and reuse conflict resolutions
+	autoupdate = true             # Apply stored resolutions automatically
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+
+[rebase]
+	autoStash = true
+
+[credential]
+	helper = cache
+
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[gpg]
+#	format = ssh
+
+[help]
+	autocorrect = prompt

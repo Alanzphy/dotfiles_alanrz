@@ -1,0 +1,544 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Print a new line at the start of the prompt (this is configured by default)
+add_newline = true
+
+format = """
+$env_var\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+
+
+$fill\
+$hg_branch\
+$kubernetes\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$cristal\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$haskell\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$bun\
+$docker_context\
+$nix_shell\
+$conda\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$crystal\
+$custom\
+$sudo\
+$battery\
+$status\
+$container\
+$shell\
+
+$cmd_duration $jobs $time\
+$line_break\
+$character"""
+
+command_timeout = 10000
+
+[fill]
+symbol = " "
+
+[directory]
+style = "blue"
+read_only = " 󰌾"
+truncation_length = 4
+truncate_to_repo = true
+truncation_symbol = '…/'
+home_symbol	= "~"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+
+[character]
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](green)"
+
+[git_branch]
+symbol = " "
+format = 'on [$symbol$branch(:$remote_branch)]($style) '
+style = "bold purple"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "cyan"
+conflicted = "🏳"
+up_to_date = " "
+untracked = "󰀪 "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = "󰏗 "
+modified = " "
+staged = '[++\($count\)](green)'
+renamed = "󰖷 "
+deleted = " "
+
+[git_metrics]
+disabled = false
+
+[git_commit]
+commit_hash_length = 7
+format	= "[\\($hash$tag\\)]($style) "
+tag_symbol	= " 🏷 "
+
+[jobs]
+symbol = '✦'
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[cmd_duration]
+format = " [$duration]($style)"
+style = "yellow"
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+
+[username]
+style_user = "white bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+format = 'on [$hostname]($style) in '
+style = 'bold dimmed green'
+trim_at = "-"
+disabled = false
+
+[memory_usage]
+disabled = false
+symbol = "󰍛 "
+threshold = 70
+style = "bold dimmed white"
+
+[time]
+disabled = true
+style = "bold white"
+format = "[$time]($style)"
+use_12hr = true
+
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](white)'
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+
+
+[aws]
+symbol = "  "
+format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+style = 'bold yellow'
+expiration_symbol = 'X'
+disabled = false
+
+
+[azure]
+disabled = false
+format = 'on [$symbol($subscription)]($style) '
+symbol = '󰠅  '
+style = 'blue bold'
+
+
+[battery]
+full_symbol = "󰂄 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = '󰁽 '
+empty_symbol = '󰂎 '
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+
+[bun]
+format = '\[[$symbol($version)]($style)\]'
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+format = '\[[$symbol($version(-$name))]($style)\]'
+
+[cmake]
+format = '\[[$symbol($version)]($style)\]'
+
+[cobol]
+format = '\[[$symbol($version)]($style)\]'
+
+[conda]
+symbol = " "
+format = '\[[$symbol$environment]($style)\]'
+
+
+[crystal]
+format = '\[[$symbol($version)]($style)\]'
+
+[container]
+symbol = " ⬢"
+style	= "bold red dimmed"
+format	= "[$symbol \\[$name\\]]($style) "
+disabled = false
+
+[daml]
+format = '\[[$symbol($version)]($style)\]'
+
+[dart]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[deno]
+format = '\[[$symbol($version)]($style)\]'
+
+[dotnet]
+format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
+
+[docker_context]
+format = '\[[$symbol$context]($style)\] '
+symbol = " "
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", ".dockerignore", "compose.yml", "compose.yaml"]
+style = "blue bold"
+
+[elixir]
+symbol = " "
+format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+
+
+[elm]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[erlang]
+format = '\[[$symbol($version)]($style)\]'
+
+[fennel]
+format = '\[[$symbol($version)]($style)\]'
+
+[fossil_branch]
+format = '\[[$symbol$branch]($style)\]'
+
+
+[gcloud]
+format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+symbol = '☁️ '
+
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[gradle]
+format = '\[[$symbol($version)]($style)\]'
+
+[guix_shell]
+symbol = " "
+format = '\[[$symbol]($style)\]'
+
+
+[haskell]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+[haxe]
+symbol = "⌘ "
+format = '\[[$symbol($version)]($style)\]'
+
+[helm]
+format = '\[[$symbol($version)]($style)\]'
+
+
+[hg_branch]
+symbol = " "
+format = '\[[$symbol$branch]($style)\]'
+
+
+[java]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+
+[julia]
+symbol = " "
+format = '\[[$symbol($version)]($style)\]'
+
+
+[kotlin]
+format = '\[[$symbol($version)]($style)\]'
+
+[kubernetes]
+disabled = true
+symbol = '☸ '
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+detect_files = ['k8s']
+
+[lua]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[meson]
+symbol = "󰔷 "
+format = '\[[$symbol$project]($style)\]'
+
+
+[nim]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+format = '\[[$symbol$state( \($name\))]($style)\]'
+
+[nodejs]
+format = '\[[$symbol($version)]($style)\]'
+
+[ocaml]
+format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
+
+[opa]
+format = '\[[$symbol($version)]($style)\]'
+
+[openstack]
+format = '\[[$symbol$cloud(\($project\))]($style)\]'
+
+[os]
+format = '\[[$symbol]($style)\]'
+
+[package]
+disabled = true
+format = '\[[$symbol$version]($style)\]'
+symbol = "󰏗 "
+
+[perl]
+format = '\[[$symbol($version)]($style)\]'
+
+[php]
+format = '\[[$symbol($version)]($style)\]'
+
+[pijul_channel]
+format = '\[[$symbol$channel]($style)\]'
+
+[pulumi]
+format = '\[[$symbol$stack]($style)\]'
+
+[purescript]
+format = '\[[$symbol($version)]($style)\]'
+
+[python]
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+style = "bold green"
+symbol = " "
+
+[raku]
+format = '\[[$symbol($version-$vm_version)]($style)\]'
+
+[red]
+format = '\[[$symbol($version)]($style)\]'
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[rust]
+format = '\[[$symbol($version)]($style)\]'
+style = "bold green"
+symbol = " "
+
+[scala]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[spack]
+symbol = "🅢 "
+format = '\[[$symbol$environment]($style)\]'
+
+[sudo]
+format = '\[[as $symbol]\]'
+style = 'bold red'
+
+[swift]
+format = '\[[$symbol($version)]($style)\]'
+
+[terraform]
+format = '\[[$symbol$workspace]($style)\]'
+
+[vagrant]
+format = '\[[$symbol($version)]($style)\]'
+
+[vlang]
+format = '\[[$symbol($version)]($style)\]'
+
+[zig]
+format = '\[[$symbol($version)]($style)\]'
+
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Macos = "󰀵 "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
+
+
+
+
+
+
+################################################################################
+## Custom Commands
+################################################################################
+[custom.git_server]
+#disabled = true
+description = "Display symbol for remote Git server"
+command = """
+GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$GIT_REMOTE" =~ "github" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+    GIT_REMOTE_SYMBOL="󰊢 "
+else
+    GIT_REMOTE_SYMBOL=" "
+fi
+echo "$GIT_REMOTE_SYMBOL "
+"""
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+style = "white"
+format = '[$output]($style) '
+
+[custom.git_scope]
+disabled = true
+command = '''
+printf "%s (%s)" \
+  "$(if [ -n "$GIT_AUTHOR_EMAIL" ]; then echo "$GIT_AUTHOR_EMAIL"; else git config user.email; fi)" \
+  "$(if [ -n "$GIT_AUTHOR_NAME" ]; then echo "$GIT_AUTHOR_NAME"; else git config user.name; fi)"
+'''
+description = 'The currently configured Git user.{email,name}'
+format = '$output '
+style = 'blue bold'
+when = 'git rev-parse --is-inside-work-tree'
+
+[custom.git_last_commit]
+disabled = true
+description = "Display last commit hash and message"
+command = "git show -s --format='%h \"%s\"'"
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+style = "bright-yellow bold"
+format = "[$output]($style) "
+
+[custom.ssh_no_keys]
+disabled = true
+description = "SSH missing keys"
+when = "ssh-add -l | grep -q 'no identities'"
+command = "echo 🚫"
+format = '\[$symbol[$output]($style)\]'
+shell = ["bash", "--noprofile", "--norc"]
+symbol = "🔑"
+style = "bold fg:red"
+
+[custom.ssh_keys]
+disabled = true
+description = "SSH key count"
+when = "ssh-add -l | grep -v -q 'no identities'"
+command = "ssh-add -l | grep -v 'no identities' | wc -l"
+format = '\[$symbol[$output]($style)\]'
+shell = ["bash", "--noprofile", "--norc"]
+symbol = "🔑"
+style = "bold fg:green"
