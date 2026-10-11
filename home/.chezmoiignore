@@ -6,6 +6,10 @@
 .local/share/dbus-1
 {{ end }}
 
+# Reference-only files (contains placeholders that must NOT be applied):
+# ai-usagebar treat its dir as secret, chmod 600 on each save.
+.config/ai-usagebar
+
 {{ if ne .chezmoi.os "darwin" }}
 # macOS-only
 Library

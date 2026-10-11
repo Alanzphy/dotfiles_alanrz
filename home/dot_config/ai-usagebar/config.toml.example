@@ -1,0 +1,21 @@
+[ui]
+primary = "supergrok"
+
+[supergrok]
+enabled = true
+
+[opencode-go]
+enabled = true
+api_key_env = "OPENCODE_GO_API_KEY"
+api_key = "sk-PEGA-TU-API-KEY-AQUI"
+
+# Keep their credentials/configuration, but hide these providers from the UI.
+[zai]
+enabled = false
+
+[openrouter]
+enabled = false
+api_key = "sk-PEGA-TU-API-KEY-AQUI"
+
+[commandcode]
+enabled = false
