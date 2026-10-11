@@ -1,0 +1,6 @@
+-- ONCE: este archivo lo escribe chezmoi la PRIMERA vez y luego NO lo toca más.
+-- Pega aquí tus keys (expiran; rótalas tú). La bar (quickshell) lee esto al arrancar.
+-- Marca única: TODO-REEMPLAZAR-KEY
+{{- $k := (env "OPENCODE_GO_API_KEY") -}}
+hl.env("OPENCODE_GO_API_KEY", "{{ $k }}")
+hl.env("OPENROUTER_API_KEY", "{{ $k }}")

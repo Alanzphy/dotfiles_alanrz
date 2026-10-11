@@ -1,5 +1,0 @@
-# Rendered by chezmoi. Key priority: env var > [data.aiUsagebar.apiKey] in
-# local ~/.config/chezmoi/chezmoi.toml. private_ = chmod 600. Never in git.
-{{- $k := (env "OPENCODE_GO_API_KEY") | default (.aiUsagebar.apiKey | default "") -}}
-OPENCODE_GO_API_KEY={{ $k }}
-OPENROUTER_API_KEY={{ $k }}

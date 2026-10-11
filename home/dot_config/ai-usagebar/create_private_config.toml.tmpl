@@ -1,0 +1,22 @@
+[ui]
+primary = "supergrok"
+
+[supergrok]
+enabled = true
+
+[opencode-go]
+enabled = true
+api_key_env = "OPENCODE_GO_API_KEY"
+# api_key = "sk-..."   # ← si prefieres pegar aquí la key inline, la toma como fallback; chmod 600.
+
+# Hide these providers from the UI, keep credentials/config.
+[zai]
+enabled = false
+
+[openrouter]
+enabled = false
+api_key_env = "OPENROUTER_API_KEY"
+# api_key = "sk-..."   # ← fallback inline, si no quieres usar env var.
+
+[commandcode]
+enabled = false
