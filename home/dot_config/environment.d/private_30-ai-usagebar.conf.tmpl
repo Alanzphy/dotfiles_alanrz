@@ -1,4 +1,5 @@
-# AI usage bar plugin credentials (private_: rendered chmod 600).
-# Keys live in ~/.config/chezmoi/chezmoi.toml [data.aiUsagebar] — never in git.
-OPENCODE_GO_API_KEY={{ .aiUsagebar.apiKey }}
-OPENROUTER_API_KEY={{ .aiUsagebar.apiKey }}
+# Rendered by chezmoi. Key priority: env var > [data.aiUsagebar.apiKey] in
+# local ~/.config/chezmoi/chezmoi.toml. private_ = chmod 600. Never in git.
+{{- $k := (env "OPENCODE_GO_API_KEY") | default (.aiUsagebar.apiKey | default "") -}}
+OPENCODE_GO_API_KEY={{ $k }}
+OPENROUTER_API_KEY={{ $k }}

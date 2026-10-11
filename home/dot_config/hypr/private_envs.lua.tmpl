@@ -1,3 +1,4 @@
--- Session env for ai-usagebar plugin (rendered chmod 600; rendered from chezmoi data).
-hl.env("OPENCODE_GO_API_KEY", "{{ .aiUsagebar.apiKey }}")
-hl.env("OPENROUTER_API_KEY", "{{ .aiUsagebar.apiKey }}")
+-- Rendered by chezmoi (private_ = chmod 600). Key: env var > chezmoi [data.aiUsagebar].
+{{- $k := (env "OPENCODE_GO_API_KEY") | default (.aiUsagebar.apiKey | default "") -}}
+hl.env("OPENCODE_GO_API_KEY", "{{ $k }}")
+hl.env("OPENROUTER_API_KEY", "{{ $k }}")
