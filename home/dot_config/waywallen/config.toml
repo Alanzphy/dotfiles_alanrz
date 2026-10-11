@@ -47,7 +47,7 @@ gamemode = "pause"
 resume_delay_ms = 250
 
 [global.auto_replay.window_exclusions]
-application_ids = []
+application_ids = ["spotifast"]
 titles = []
 application_id_patterns = []
 title_patterns = []
@@ -67,43 +67,43 @@ angle = 0
 x = 50
 y = 50
 
-[plugin.weweb-renderer]
-volume = "100"
-render_node = ""
-shared_texture_enabled = "true"
-fps = "30"
-resolution = "2"
-remote_debugging_port = "0"
-enable_audio = "false"
-
 [plugin.waywallen-video]
-render_node = ""
-resolution = "0"
-enable_audio = "false"
-loop_file = "inf"
 fps = "60"
-volume = "100"
+enable_audio = "false"
 hwdec = "auto"
+loop_file = "inf"
+volume = "100"
+resolution = "0"
+render_node = ""
 
 [plugin.waywallen-image]
-render_node = ""
 resolution = "0"
+render_node = ""
 fps = "30"
+
+[plugin.weweb-renderer]
+fps = "30"
+remote_debugging_port = "0"
+shared_texture_enabled = "true"
+enable_audio = "false"
+volume = "100"
+render_node = ""
+resolution = "2"
 
 [plugin.wescene-renderer]
 fps = "60"
-render_node = ""
 custom_extent = "1080"
-volume = "100"
-hwdec = "auto"
-resolution = "2"
 msaa = "1"
+resolution = "2"
+volume = "100"
+render_node = ""
 enable_audio = "false"
-
-[display.layer-ea12ed3717a8ff63b67f0b59bb76ea56]
-last_wallpaper = "33"
+hwdec = "auto"
 
 [display.layer-baa2fee4ddfef4c32ab5eea915f487f3]
+last_wallpaper = "33"
+
+[display.layer-ea12ed3717a8ff63b67f0b59bb76ea56]
 last_wallpaper = "33"
 
 [canvas]
