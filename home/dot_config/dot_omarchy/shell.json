@@ -1,0 +1,152 @@
+{
+  "bar": {
+    "centerAnchor": "omarchy.clock",
+    "layout": {
+      "center": [
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "format": "ddd d MMM h:mm AP",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "id": "omarchy.clock",
+          "verticalFormat": "dddd\nd MMMM\nh:mm AP"
+        },
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "ajkulundu.mediaplusplus",
+          "progressAnimation": "wiggle"
+        }
+      ],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "activeStyle": "solid",
+          "density": "compact",
+          "hideEmpty": false,
+          "iconStyle": "color",
+          "id": "tornikegomareli.spaces",
+          "perMonitor": true,
+          "persistentWorkspaces": 0,
+          "previewLive": false,
+          "previewSize": "medium",
+          "showApps": "all"
+        },
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "right": [
+        {
+          "hidden": [],
+          "id": "io.github.tyrichards.tray",
+          "showTrayIcons": true
+        },
+        {
+          "allowUnverifiedInstalls": true,
+          "allowUnverifiedUpdates": true,
+          "id": "io.github.juancasanueva.plugin-manager"
+        },
+        {
+          "border": "horiz",
+          "chrome": true,
+          "id": "io.github.inxeo.isles",
+          "look": "cluster",
+          "opacity": 25,
+          "padding": 5,
+          "presetName": "Glowy",
+          "radius": 77,
+          "strokeOpacity": 58,
+          "strokeWidth": 0
+        },
+        {
+          "id": "io.github.twiking.omasettings"
+        },
+        {
+          "id": "io.github.diegopluna.argus",
+          "mangoHud": {
+            "bgAlpha": 0.4,
+            "compact": true,
+            "cpuText": "",
+            "enabled": false,
+            "fontSize": 22,
+            "fpsHigh": 60,
+            "fpsLimit": 0,
+            "fpsLow": 30,
+            "gpuText": "",
+            "horizontal": false,
+            "hotkey": "Shift_R+F12",
+            "metrics": [
+              "fps",
+              "frametime",
+              "cpu",
+              "gpu"
+            ],
+            "offsetX": 0,
+            "offsetY": 0,
+            "position": "top-left",
+            "roundCorners": 0,
+            "startHidden": false,
+            "tableColumns": 3,
+            "themed": true
+          },
+          "show": [
+            "cpu",
+            "ram",
+            "cputemp"
+          ]
+        },
+        {
+          "id": "akitaonrails.ai-usagebar",
+          "barWindow": "session",
+          "lastSelectedEntryId": "opencode-go",
+          "showAll": true,
+          "showProvider": false
+        },
+        {
+          "id": "omarchy.tailscale"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power"
+        }
+      ]
+    },
+    "position": "top",
+    "transparent": true
+  },
+  "cloneSourceRestores": [
+    "ajkulundu.mediaplusplus"
+  ],
+  "disabledPlugins": [
+    "omarchy.media"
+  ],
+  "idle": {
+    "lock": 900,
+    "screensaver": 600
+  },
+  "plugins": [
+    {
+      "id": "macos.dock"
+    }
+  ],
+  "version": 1
+}
