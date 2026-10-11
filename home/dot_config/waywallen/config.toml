@@ -75,7 +75,7 @@ render_node = ""
 [plugin.waywallen-video]
 render_node = ""
 volume = "100"
-fps = "30"
+fps = "60"
 resolution = "0"
 loop_file = "inf"
 hwdec = "auto"
