@@ -15,6 +15,3 @@ Library
 .config/karabiner
 {{ end }}
 
-# Oh My Zsh runtime cache (inside the .chezmoiexternal-managed tree)
-.oh-my-zsh/cache/**
-

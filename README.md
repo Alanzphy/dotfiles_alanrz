@@ -25,8 +25,15 @@ Design rules (why each thing is here):
 # 0. install Omarchy per its docs, then:
 omarchy pkg add chezmoi
 git clone https://github.com/Alanzphy/dotfiles_alanrz ~/Projects/dotfiles_alanrz
-chezmoi init --source ~/Projects/dotfiles_alanrz --apply   # also downloads Oh My Zsh + plugins
-chsh -s /usr/bin/zsh                                       # zsh as login shell (needs zsh-completions, thefuck pkgs)
+chezmoi init --source ~/Projects/dotfiles_alanrz --apply
+
+# 0b. zsh: Oh My Zsh + plugins are NOT in the repo (they self-update via git)
+RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+P=~/.oh-my-zsh/custom/plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions $P/zsh-autosuggestions
+git clone https://github.com/Aloxaf/fzf-tab $P/fzf-tab
+git clone https://github.com/z-shell/F-Sy-H $P/F-Sy-H
+chsh -s /usr/bin/zsh                     # needs zsh, zsh-completions, thefuck pkgs
 
 # 1. restore Omarchy shell plugins (15; reads ~/.config/omarchy/plugin-manifest.json)
 ~/.config/omarchy/restore-plugins.sh
@@ -111,7 +118,7 @@ credentials files (marked `create_`); they are never overwritten.
 | `.zsh/env.zsh` | Omarchy defaults for zsh (`EDITOR`, `BROWSER`, `MANPAGER`…) + `~/.local/bin` in `PATH` |
 | `.zsh/starship.zsh` | distro icon → `STARSHIP_DISTRO` (used by `starship.toml`) |
 | `.zsh/functions.zsh`, `.zsh/venvchecker.zsh` | `ex` (extract anything), `venv` (toggle/create `.venv`) |
-| `.chezmoiexternal.toml` | Oh My Zsh + `zsh-autosuggestions`, `fzf-tab`, `F-Sy-H` as archives (weekly refresh). OMZ auto-update is off: update with `chezmoi -R apply` |
+| ⚠ omitted: `~/.oh-my-zsh` + plugins | installed by hand (step 0b), updated by Oh My Zsh itself; plugins: `git -C ~/.oh-my-zsh/custom/plugins/<name> pull` |
 | ⚠ omitted: `~/.zsh/completions/_*` | generated per tool, e.g. `exegol completion zsh > ~/.zsh/completions/_exegol` |
 | `.bashrc`, `.profile` (Linux-only) | Omarchy bashrc + `OPENCODE_GO_API_KEY` from opencode's `auth.json`; JetBrains Toolbox in `PATH` |
 
