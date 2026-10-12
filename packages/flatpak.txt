@@ -1,0 +1,4 @@
+com.github.tchx84.Flatseal
+com.usebottles.bottles
+io.github.kolunmi.Bazaar
+io.missioncenter.MissionCenter
