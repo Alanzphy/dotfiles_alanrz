@@ -1,0 +1,20 @@
+# Omarchy environment (OMARCHY_PATH + PATH), needed even for non-interactive shells
+[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
+
+# Reuse OpenCode Go's credential store without duplicating the API key.
+if [[ -z "${OPENCODE_GO_API_KEY:-}" && -r "$HOME/.local/share/opencode/auth.json" && -x "$(command -v jq 2>/dev/null)" ]]; then
+  OPENCODE_GO_API_KEY="$(jq -r '."opencode-go".key // empty' "$HOME/.local/share/opencode/auth.json")"
+  [[ -n "$OPENCODE_GO_API_KEY" ]] && export OPENCODE_GO_API_KEY
+fi
+
+# If not running interactively, don't do anything else (leave this above the rc source)
+[[ $- != *i* ]] && return
+
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them here!)
+source "$OMARCHY_PATH/default/bash/rc"
+
+# Add your own exports, aliases, and functions here.
+#
+# Make an alias for invoking commands you use constantly
+# alias p='python'

@@ -4,6 +4,8 @@
 # Linux-only (Omarchy / Hyprland / GNOME)
 .config/hypr
 .local/share/dbus-1
+.bashrc
+.profile
 {{ end }}
 
 {{ if ne .chezmoi.os "darwin" }}
@@ -12,4 +14,7 @@ Library
 .config/aerospace
 .config/karabiner
 {{ end }}
+
+# Oh My Zsh runtime cache (inside the .chezmoiexternal-managed tree)
+.oh-my-zsh/cache/**
 

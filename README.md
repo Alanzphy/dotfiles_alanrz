@@ -25,7 +25,8 @@ Design rules (why each thing is here):
 # 0. install Omarchy per its docs, then:
 omarchy pkg add chezmoi
 git clone https://github.com/Alanzphy/dotfiles_alanrz ~/Projects/dotfiles_alanrz
-chezmoi init --source ~/Projects/dotfiles_alanrz --apply
+chezmoi init --source ~/Projects/dotfiles_alanrz --apply   # also downloads Oh My Zsh + plugins
+chsh -s /usr/bin/zsh                                       # zsh as login shell (needs zsh-completions, thefuck pkgs)
 
 # 1. restore Omarchy shell plugins (15; reads ~/.config/omarchy/plugin-manifest.json)
 ~/.config/omarchy/restore-plugins.sh
@@ -101,6 +102,18 @@ credentials files (marked `create_`); they are never overwritten.
 | `starship.toml` | full custom prompt config |
 | `ghostty/config` + `ghostty/shaders/cursor_tail.glsl` | font-size 10, cursor trail shader, custom scroll mult |
 | `kitty/kitty.conf` | `cursor_trail 3` |
+
+### Zsh (`~/.zshrc`, `~/.zsh/`)
+| File | What it holds |
+|------|-------------------------------|
+| `.zshrc` | Oh My Zsh (`sudo fzf zoxide ssh zsh-autosuggestions F-Sy-H fzf-tab`), history, keybindings, starship/thefuck/zoxide init, `~/.zsh/completions` in `fpath` |
+| `.zsh/aliases.zsh` | personal aliases (git, docker, yt-dlp, eza/bat, pacman, `exegol` via pipx); sourced AFTER Oh My Zsh so they win |
+| `.zsh/env.zsh` | Omarchy defaults for zsh (`EDITOR`, `BROWSER`, `MANPAGER`…) + `~/.local/bin` in `PATH` |
+| `.zsh/starship.zsh` | distro icon → `STARSHIP_DISTRO` (used by `starship.toml`) |
+| `.zsh/functions.zsh`, `.zsh/venvchecker.zsh` | `ex` (extract anything), `venv` (toggle/create `.venv`) |
+| `.chezmoiexternal.toml` | Oh My Zsh + `zsh-autosuggestions`, `fzf-tab`, `F-Sy-H` as archives (weekly refresh). OMZ auto-update is off: update with `chezmoi -R apply` |
+| ⚠ omitted: `~/.zsh/completions/_*` | generated per tool, e.g. `exegol completion zsh > ~/.zsh/completions/_exegol` |
+| `.bashrc`, `.profile` (Linux-only) | Omarchy bashrc + `OPENCODE_GO_API_KEY` from opencode's `auth.json`; JetBrains Toolbox in `PATH` |
 
 ### Browsers: hardware decode (`~/*.conf`)
 4 files adding the same flags: `brave-origin-flags.conf`, `chromium-flags.conf`,
