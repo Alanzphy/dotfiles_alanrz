@@ -119,7 +119,8 @@ credentials files (marked `create_`); they are never overwritten.
 | `.zsh/starship.zsh` | distro icon → `STARSHIP_DISTRO` (used by `starship.toml`) |
 | `.zsh/functions.zsh`, `.zsh/venvchecker.zsh` | `ex` (extract anything), `venv` (toggle/create `.venv`) |
 | ⚠ omitted: `~/.oh-my-zsh` + plugins | installed by hand (step 0b), updated by Oh My Zsh itself; plugins: `git -C ~/.oh-my-zsh/custom/plugins/<name> pull` |
-| ⚠ omitted: `~/.zsh/completions/_*` | generated per tool, e.g. `exegol completion zsh > ~/.zsh/completions/_exegol` |
+| `.zsh/completions/_exegol` | Exegol zsh completion (`exegol completion zsh`); after updating Exegol regenerate it and `chezmoi re-add ~/.zsh/completions/_exegol` |
+| ⚠ omitted: `~/.zsh_history` | public repo — command history can contain secrets |
 | `.bashrc`, `.profile` (Linux-only) | Omarchy bashrc + `OPENCODE_GO_API_KEY` from opencode's `auth.json`; JetBrains Toolbox in `PATH` |
 
 ### Browsers: hardware decode (`~/*.conf`)
