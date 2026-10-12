@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=F5 VPN
+GenericName=VPN Client
+Comment=F5 BIG-IP APM VPN client (no Qt)
+Exec=/usr/bin/f5vpn-launcher %u
+Icon=f5vpn
+Terminal=false
+Type=Application
+Categories=Network;
+MimeType=x-scheme-handler/f5-vpn;x-scheme-handler/f5-epi;
+StartupNotify=false
+StartupWMClass=f5vpn-ng
+DBusActivatable=true
+X-GNOME-DBusActivationService=com.f5.f5vpn
+X-DBUS-ServiceName=com.f5.f5vpn
+X-DBUS-StartupType=Unique
+NoDisplay=false

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=F5 VPN
+GenericName=VPN Client
+Comment=F5 BIG-IP APM VPN client (no Qt)
+Exec=env GDK_BACKEND=x11 WEBKIT_DISABLE_DMABUF_RENDERER=1 /usr/bin/f5vpn-launcher %u
+Icon=f5vpn
+Terminal=false
+Type=Application
+Categories=Network;
+MimeType=x-scheme-handler/f5-vpn;x-scheme-handler/f5-epi;
+StartupNotify=false
+StartupWMClass=f5vpn-ng
+DBusActivatable=false
+NoDisplay=false
