@@ -4,6 +4,7 @@
 # Linux-only (Omarchy / Hyprland / GNOME)
 .config/hypr
 .local/share/dbus-1
+.local/share/applications
 .bashrc
 .profile
 {{ end }}

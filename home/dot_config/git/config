@@ -3,7 +3,7 @@
 [user]
 	name = Alan Ruiz
 	email = alanzphy@gmail.com
-#	signingkey = /home/alanz/.ssh/ssh-github.pub
+#	signingkey = ~/.ssh/ssh-github.pub
 
 [init]
 	defaultBranch = main

@@ -1,0 +1,15 @@
+modelRoles:
+  default: opencode-go/deepseek-v4.1-flash
+symbolPreset: nerd
+composer:
+  shape: band
+theme:
+  dark: titanium
+  light: light
+setupVersion: 2
+defaultThinkingLevel: auto
+dev:
+  autoqaConsent: denied
+hideThinkingBlock: true
+extensions:
+  - /home/alanrz/.config/omarchy/plugins/tornikegomareli.spaces/hooks/omp-extension.js

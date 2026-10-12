@@ -1,0 +1,1 @@
+../../omarchy/plugins/tornikegomareli.spaces/hooks/opencode-plugin.js

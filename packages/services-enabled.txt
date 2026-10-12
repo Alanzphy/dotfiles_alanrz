@@ -1,42 +1,54 @@
-cups.path
+# Unidades habilitadas en esta máquina (referencia para diffear una instalación nueva:
+#   systemctl list-unit-files --state=enabled
+#   systemctl --user list-unit-files --state=enabled )
+#
+# Casi todas las habilita Omarchy/Arch solas (sddm, NetworkManager, bluetooth, cups,
+# avahi, ufw, docker.socket, oomd, resolved, snapper, limine-snapper-sync, getty…).
+# ★ = fuera de esas: son las que hay que habilitar a mano en una máquina nueva:
+#   sudo systemctl enable --now tailscaled
+#   systemctl --user enable --now voxtype wallpaper-layer-top
+
+# ── sistema ──
 avahi-daemon.service
 bluetooth.service
+cups.path
 cups.service
+docker.socket
 getty@.service
 limine-snapper-sync.service
 linux-modules-cleanup.service
 NetworkManager-dispatcher.service
 NetworkManager.service
+paccache.timer
 power-profiles-daemon.service
+remote-fs.target
 sddm.service
+★ tailscaled.service
 systemd-oomd.service
-systemd-resolved.service
-systemd-timesyncd.service
-tailscaled.service
-ufw.service
-avahi-daemon.socket
-cups.socket
-docker.socket
 systemd-oomd.socket
 systemd-resolved-monitor.socket
 systemd-resolved-varlink.socket
+systemd-resolved.service
+systemd-timesyncd.service
 systemd-userdbd.socket
-remote-fs.target
-paccache.timer
+avahi-daemon.socket
+cups.socket
 snapper-cleanup.timer
---- user:
+ufw.service
+
+# ── usuario ──
 bt-agent.service
+gnome-keyring-daemon.socket
 omarchy-crash-watch.service
 omarchy-fcitx5.service
 omarchy-migrate-notify.service
 omarchy-recover-internal-monitor.service
 omarchy-sleep-lock.service
-pipewire-pulse.service
-voxtype.service
-wallpaper-layer-top.service
-wireplumber.service
-xdg-user-dirs.service
-gnome-keyring-daemon.socket
 p11-kit-server.socket
+pipewire-pulse.service
 pipewire-pulse.socket
 pipewire.socket
+★ voxtype.service
+★ wallpaper-layer-top.service
+wireplumber.service
+xdg-user-dirs.service
