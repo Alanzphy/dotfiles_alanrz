@@ -18,6 +18,11 @@ Design rules (why each thing is here):
    (`TODO-REEMPLAZAR-KEY`) and then never touches them again — so syncing,
    re-applying, and rotating that expired API key is a manual `vim` + restart,
    and `git grep sk-` across all history stays zero.
+3. **What can't be a template is encrypted.** This repo is public, so `~/.ssh`
+   (config, known_hosts, private key) goes in as age-encrypted
+   `encrypted_*.age` files. The age identity itself is committed only as
+   `key.txt.age`, encrypted with a passphrase; `chezmoi init` asks for that
+   passphrase once per machine and writes `~/.config/chezmoi/key.txt`.
 
 ## New machine (Linux / Omarchy)
 
@@ -25,7 +30,7 @@ Design rules (why each thing is here):
 # 0. install Omarchy per its docs, then:
 omarchy pkg add chezmoi
 git clone https://github.com/Alanzphy/dotfiles_alanrz ~/Projects/dotfiles_alanrz
-chezmoi init --source ~/Projects/dotfiles_alanrz --apply
+chezmoi init --source ~/Projects/dotfiles_alanrz --apply   # asks the age passphrase once (decrypts ~/.ssh)
 
 # 0b. zsh: Oh My Zsh + plugins are NOT in the repo (they self-update via git)
 RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -122,6 +127,18 @@ credentials files (marked `create_`); they are never overwritten.
 | `.zsh/completions/_exegol` | Exegol zsh completion (`exegol completion zsh`); after updating Exegol regenerate it and `chezmoi re-add ~/.zsh/completions/_exegol` |
 | ⚠ omitted: `~/.zsh_history` | public repo — command history can contain secrets |
 | `.bashrc`, `.profile` (Linux-only) | Omarchy bashrc + `OPENCODE_GO_API_KEY` from opencode's `auth.json`; JetBrains Toolbox in `PATH` |
+
+### SSH (`~/.ssh/`, age-encrypted)
+| File | What it holds |
+|------|-------------------------------|
+| `encrypted_private_config.age` | host aliases (VPS, Tailscale, lab machines), ports, users |
+| `encrypted_private_known_hosts.age` | trusted host keys |
+| `encrypted_private_vps_v4cores.age` | VPS private key (also passphrase-protected by ssh-keygen) |
+| `vps_v4cores.pub` | public key, plain |
+| `key.txt.age` + `run_onchange_before_decrypt-private-key.sh.tmpl` | age identity encrypted with a passphrase; the script decrypts it to `~/.config/chezmoi/key.txt` (600) only if missing |
+
+Add or update an SSH file: `chezmoi add --encrypt ~/.ssh/<file>` (never plain `chezmoi add` in this dir).
+Lose the passphrase = the encrypted files can't be recovered from the repo (keep it in the password manager).
 
 ### Browsers: hardware decode (`~/*.conf`)
 4 files adding the same flags: `brave-origin-flags.conf`, `chromium-flags.conf`,

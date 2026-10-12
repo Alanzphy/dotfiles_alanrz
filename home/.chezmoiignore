@@ -15,3 +15,6 @@ Library
 .config/karabiner
 {{ end }}
 
+# Passphrase-encrypted age identity: source-only, never a target file
+key.txt.age
+

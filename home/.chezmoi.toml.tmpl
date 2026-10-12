@@ -1,6 +1,7 @@
 {{- /* Regenerate local config; keep whatever data the templates need.
        Key strategy: prefer env var, else prompt, else state (promptOnce). */ -}}
 sourceDir = {{ joinPath .chezmoi.homeDir "Projects/dotfiles_alanrz" | quote }}
+encryption = "age"
 
 {{- $aiKey := "" }}
 {{- if stdinIsATTY }}
@@ -8,6 +9,12 @@ sourceDir = {{ joinPath .chezmoi.homeDir "Projects/dotfiles_alanrz" | quote }}
 {{- else }}
 {{-   $aiKey = env "OPENCODE_GO_API_KEY" }}
 {{- end }}
+
+# age: private key decrypted once from key.txt.age (passphrase) by
+# run_onchange_before_decrypt-private-key.sh.tmpl
+[age]
+    identity = {{ joinPath .chezmoi.homeDir ".config/chezmoi/key.txt" | quote }}
+    recipient = "age1hvxl30qe9xd5p08z2x80nguc5j7gxu7y245afwfgqc5djjzmnevshz9ut6"
 
 [data]
     os = {{ .chezmoi.os | quote }}
