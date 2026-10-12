@@ -166,6 +166,7 @@ they peg an entire core playing YouTube AV1 (origin of this audit).
 | `.omp/agent/config.yml` | ajustes de omp + la extensión del plugin Spaces (`extensions:`) |
 | `.config/opencode/plugins/spaces.js` (symlink) | plugin de Spaces para OpenCode (apunta al clone del plugin) |
 | `.config/environment.d/10-gdk-scale.conf` | `GDK_SCALE=1` para la sesión (además de `monitors.lua`; sin esto las apps x11 arrancan al doble en pantallas scale 1) |
+| `local/share/dbus-1/services/org.gnome.NautilusPreviewer.service` | fuerza `GST_GL_API=opengl3` en el previewer de Nautilus: sin esto la vista previa con Espacio falla al abrir video (error de OpenGL) |
 | `hyprland.lua` etc | see above |
 
 ### Packages (`packages/`)
