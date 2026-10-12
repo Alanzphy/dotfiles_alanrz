@@ -43,6 +43,15 @@ omarchy pkg aur add flea-bin && flea --default
 omarchy theme set "<your-theme>"
 ```
 
+## Tailscale after a fresh install (cutover)
+
+```bash
+# Prefer the same identity (no login): stage kept it alive
+sudo scripts/restore-tailscale.sh restore    # reads /mnt/Extra/staging/tailscale
+# If the state was lost:
+sudo scripts/restore-tailscale.sh fresh      # browser login with Alanzphy@ then rename device
+```
+
 macOS: `brew install chezmoi` then `chezmoi init --source ~/Projects/dotfiles_alanrz --apply`.
 
 ## Day to day
