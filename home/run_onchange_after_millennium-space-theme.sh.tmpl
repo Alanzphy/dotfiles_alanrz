@@ -1,0 +1,64 @@
+#!/bin/sh
+# Millennium + SpaceTheme (github.com/SpaceTheme/Steam)
+#
+# 1. Instala el tema sólo si falta; si ya existe, NO lo toca (Millennium es
+#    quien lo actualiza desde su UI). Evita el downgrade que causaría un
+#    .chezmoiexternal, que reescribe el tema en cada `chezmoi apply`.
+# 2. Fusiona en config.json únicamente lo que es tuyo: tema activo,
+#    condiciones del tema "Steam" y sus colores personalizados. El resto de
+#    la config (proxy, notificaciones, otros temas) se queda como está.
+set -eu
+
+THEME_DIR="$HOME/.local/share/Steam/millennium/themes/Steam"
+CFG="$HOME/.config/millennium/config.json"
+
+if ! command -v jq >/dev/null 2>&1; then
+    echo "millennium: falta jq" >&2
+    exit 1
+fi
+
+# --- 1. tema -------------------------------------------------------------
+if [ ! -f "$THEME_DIR/skin.json" ]; then
+    command -v curl >/dev/null 2>&1 || { echo "millennium: falta curl" >&2; exit 1; }
+    tmp=$(mktemp -d)
+    trap 'rm -rf "$tmp"' EXIT INT TERM
+    echo "millennium: instalando SpaceTheme en $THEME_DIR" >&2
+    mkdir -p "$(dirname "$THEME_DIR")"
+    curl -fsSL --retry 3 https://github.com/SpaceTheme/Steam/archive/refs/heads/main.tar.gz |
+        tar -xz -C "$tmp" --strip-components=1
+    [ -f "$tmp/skin.json" ] || { echo "millennium: archivo del tema inválido" >&2; exit 1; }
+    # Millennium usa metadata.json para el chequeo de updates; si falla la
+    # API, el tema carga igual y el update check se salta.
+    commit=$(curl -fsSL --retry 3 https://api.github.com/repos/SpaceTheme/Steam/commits/main |
+        jq -r '.sha // empty' 2>/dev/null || true)
+    if [ -n "${commit:-}" ]; then
+        printf '{\n    "commit": "%s",\n    "owner": "SpaceTheme",\n    "repo": "Steam"\n}\n' "$commit" >"$tmp/metadata.json"
+    fi
+    mv "$tmp" "$THEME_DIR"
+    trap - EXIT INT TERM
+fi
+
+# --- 2. configuración del tema ------------------------------------------
+if [ ! -f "$CFG" ]; then
+    echo "millennium: $CFG todavía no existe; abre Steam una vez y vuelve a ejecutar 'chezmoi apply'" >&2
+    exit 0
+fi
+
+if command -v pgrep >/dev/null 2>&1 && pgrep -x steam >/dev/null 2>&1; then
+    echo "millennium: Steam está abierto; reinícialo para que lea config.json" >&2
+fi
+
+payload=$(
+    cat <<'JSON'
+{{ .millennium.spaceTheme | toJson }}
+JSON
+)
+
+tmp=$(mktemp "$CFG.XXXXXX")
+jq --argjson p "$payload" '
+    .themes = ((.themes // {})
+        | .activeTheme = $p.activeTheme
+        | .conditions = ((.conditions // {}) + $p.conditions)
+        | .themeColors = ((.themeColors // {}) + $p.themeColors))
+' "$CFG" >"$tmp"
+mv "$tmp" "$CFG"
