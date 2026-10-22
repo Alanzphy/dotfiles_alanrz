@@ -169,6 +169,20 @@ they peg an entire core playing YouTube AV1 (origin of this audit).
 | `local/share/dbus-1/services/org.gnome.NautilusPreviewer.service` | fuerza `GST_GL_API=opengl3` en el previewer de Nautilus: sin esto la vista previa con Espacio falla al abrir video (error de OpenGL) |
 | `hyprland.lua` etc | see above |
 
+### pacman / makepkg (`~/.config/pacman/makepkg.conf`)
+
+Override por usuario, sin tocar `/etc/makepkg.conf`: makepkg lo sourcea después
+del de sistema (`/usr/share/makepkg/util/config.sh`), así que el `OPTIONS` de
+aquí gana y sobrevive a las actualizaciones del paquete `pacman`.
+
+Lleva `!debug` en vez de `debug`. Con `debug` + `strip`, cada build AUR emitía un
+split `<pkg>-debug` que `yay -Sua` (lo que corre `omarchy update`) instalaba como
+dependencia: `zed-bin-debug`, `vesktop-bin-debug`, `teams-for-linux-debug`…
+Con `!debug` solo se genera el paquete real. Coste: `gdb` sin símbolos para
+paquetes AUR; para un backtrace puntual, recompilar ese paquete con
+`makepkg --config /etc/makepkg.conf`. Verificar tras un update:
+`pacman -Qq | grep -- -debug$` debe salir vacío.
+
 ### Packages (`packages/`)
 | File | What it holds |
 |------|-------------------------------|
