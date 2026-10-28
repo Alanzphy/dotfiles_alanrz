@@ -1,0 +1,13 @@
+# Omarchy desactiva el auto-prune en install/user/mise.sh y en la migración
+# 1787215483.sh ("Stop mise upgrades from pruning versions still in use"), así
+# que cada `omarchy update` (mise up) dejaba una versión más de cada tool:
+# 77 versiones viejas = 20 GB en ~/.local/share/mise.
+#
+# Con esto en true, `mise up` programa la versión reemplazada y la borra tras
+# upgrade.prune_after (24h por defecto); las versiones usadas por otro config,
+# un stub o un proceso vivo se conservan. Para liberar ya: mise prune.
+#
+# Va en conf.d y no en config.toml porque los wrappers de omarchy
+# (omarchy-mise-install) escriben `mise use -g` en config.toml en cada arranque.
+[settings.upgrade]
+auto_prune = true

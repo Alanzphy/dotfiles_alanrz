@@ -118,6 +118,22 @@ credentials files (marked `create_`); they are never overwritten.
 | `ghostty/config` + `ghostty/shaders/cursor_tail.glsl` | font-size 10, cursor trail shader, custom scroll mult |
 | `kitty/kitty.conf` | `cursor_trail 3` |
 
+### mise (`~/.config/mise/`)
+| File | What it holds |
+|------|-------------------------------|
+| `conf.d/prune.toml` | `upgrade.auto_prune = true`: `omarchy update` borra la versión reemplazada tras 24 h en vez de acumularlas |
+| `run_after_mise-auto-prune.sh` | quita `upgrade.auto_prune` de `config.toml`: mise da prioridad a `config.toml` sobre `conf.d/`, y Omarchy la escribe en `false` al provisionar |
+| ⚠ omitted: `config.toml` | lo escribe Omarchy: los wrappers de `omarchy-mise-install` corren `mise use -g` en cada arranque, así que no se versiona |
+
+Sin el prune, cada update dejaba una versión más de cada tool (77 versiones / 20 GB
+en `~/.local/share/mise`). `mise prune` borra lo pendiente de inmediato;
+`mise ls --prunable` / `mise prune --dry-run` lo muestran antes.
+
+Si tras un update vuelve a acumular: `mise settings ls | grep prune` debe decir
+`true` con origen `conf.d/prune.toml`. Un `omarchy reinstall` o una migración
+nueva que reescriba `config.toml` con `auto_prune = false` lo anula hasta el
+siguiente `chezmoi apply` (el script `run_after_` lo vuelve a quitar).
+
 ### Zsh (`~/.zshrc`, `~/.zsh/`)
 | File | What it holds |
 |------|-------------------------------|

@@ -1,0 +1,22 @@
+#!/bin/sh
+# mise: que conf.d/prune.toml mande sobre config.toml
+#
+# Omarchy fija `upgrade.auto_prune = false` en ~/.config/mise/config.toml
+# (install/user/mise.sh y la migración 1787215483.sh), y mise le da a
+# config.toml prioridad sobre los fragmentos de conf.d. En una máquina recién
+# provisionada, y en cualquier update que vuelva a escribir esa clave, la
+# decisión de este repo quedaría anulada en silencio: aquí la borramos para que
+# conf.d/prune.toml (gestionado por chezmoi) sea la única fuente.
+#
+# run_ (no run_onchange): corre en cada `chezmoi apply` para que se auto-cure;
+# sin la clave no escribe nada.
+set -eu
+
+command -v mise >/dev/null 2>&1 || exit 0
+
+cfg="${XDG_CONFIG_HOME:-$HOME/.config}/mise/config.toml"
+[ -f "$cfg" ] || exit 0
+grep -qE '^[[:space:]]*auto_prune[[:space:]]*=' "$cfg" || exit 0
+
+mise settings unset upgrade.auto_prune
+echo "mise: auto_prune eliminado de $cfg; manda conf.d/prune.toml" >&2
