@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Kali display 100 Hz
+Exec=/home/alan/.local/bin/kali-display-100hz
+X-GNOME-Autostart-enabled=true

@@ -5,9 +5,9 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Variables/#input
 hl.config({
   input = {
-    -- Toggle between US English and Latin American Spanish with Ctrl+Space.
+    -- Toggle US English and Latin American Spanish with Super+Shift+K.
     kb_layout = "us,latam",
-    kb_options = "grp:ctrl_space_toggle",
+    kb_options = "",
 --
 --    -- Use a specific keyboard variant if needed (e.g. intl for international keyboards).
 --    kb_variant = "intl",

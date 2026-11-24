@@ -1,0 +1,7 @@
+#!/bin/sh
+# Recreate the custom mode after X starts; Xrandr modes do not persist across sessions.
+xrandr --newmode 1920x1080_100.00 302.50 1920 2072 2280 2640 1080 1083 1088 1147 -hsync +vsync 2>/dev/null || true
+xrandr --addmode Virtual-1 1920x1080_100.00 2>/dev/null || true
+xrandr --output Virtual-1 --mode 1920x1080_100.00 || exit 1
+xfdesktop --quit
+xfdesktop >/dev/null 2>&1 &

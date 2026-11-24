@@ -36,15 +36,40 @@ hl.config({
   },
 })
 
--- Increase transparency for normal windows while preserving Omarchy's
--- per-application exceptions.
-o.window({ tag = "default-opacity" }, { opacity = "0.94 0.90" })
+-- Omarchy 4.5 made transparency opt-in (terminals and a few apps get the
+-- transparent-window tag). Restore the pre-4.5 look: every window is
+-- see-through except the kinds Omarchy 4.0.6 kept opaque. Using Omarchy's own
+-- tag keeps Appearance > "window opaque" and floating workspaces working.
+o.window(".*", { tag = "+transparent-window" })
+
+-- Opaque, as in 4.0.6: browsers, video and PiP, games and fullscreen apps.
+local opaque_windows = {
+  { tag = "chromium-based-browser" },
+  { tag = "firefox-based-browser" },
+  { tag = "pip" },
+  "(^.+-youtube\\.com__.*$|^.+-app\\.zoom\\.us__wc_home.*$)",
+  "steam.*",
+  ".*[Rr]esolve.*",
+  "com.libretro.RetroArch",
+  "com.moonlight_stream.Moonlight",
+  "GeForceNOW",
+  "^WebcamOverlay-(small|medium|large)$",
+  "org.omarchy.screensaver",
+  "^Hermes$",
+  "qemu",
+}
+for _, match in ipairs(opaque_windows) do
+  o.window(match, { tag = "-transparent-window" })
+end
+
+o.window({ tag = "transparent-window" }, { opacity = "0.94 0.90" })
+
+-- Browsers stay solid while focused, as Omarchy 4.0.6 had them.
+o.window({ tag = "chromium-based-browser" }, { opacity = "1.0 0.985" })
+o.window({ tag = "firefox-based-browser" }, { opacity = "1.0 0.985" })
 
 -- Brave Origin is a Chromium web app with its own window class.
-o.window("brave-origin", {
-  tag = "-default-opacity",
-  opacity = "1.0 0.985",
-})
+o.window("brave-origin", { tag = "-transparent-window", opacity = "1.0 0.985" })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#animations
 -- hl.config({
@@ -70,3 +95,8 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "easeOut
 --     column_width = 0.97,
 --   },
 -- })
+
+-- Opt another application in to Omarchy's standard transparency.
+-- Find its class with: hyprctl clients
+-- o.transparent_window("my-app")
+-- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.

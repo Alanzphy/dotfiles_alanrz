@@ -1,18 +1,8 @@
 {
-  "dockEnabled": true,
-  "visibilityMode": "hover",
-  "preferredVisibilityMode": "hover",
-  "autohide": true,
-  "overlayMode": true,
-  "visibleWorkspace": "all",
-  "autohideEdgeDepth": 1,
-  "showFolderTitles": true,
-  "showBadges": true,
-  "glassmorphism": false,
-  "blurOpacity": 0.68,
-  "widgetsEnabled": false,
-  "appMenuPosition": "left",
-  "widgetPosition": "right",
-  "dockWidgets": [],
-  "widgetSavedPositions": {}
+  "version": 1,
+  "autoHide": true,
+  "dockSide": "bottom",
+  "screenMode": "primary",
+  "showDownloads": false,
+  "showTrash": false
 }

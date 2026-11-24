@@ -1,22 +1,21 @@
 {
   "version": 1,
   "pinned": [
-    "org.gnome.Nautilus",
+    "com.thisisgm.flea",
     "brave-origin",
     "zapfast",
     "spotifast",
-    "org.mozilla.Thunderbird",
-    "orca"
+    "orca",
+    "org.mozilla.Thunderbird"
   ],
   "order": [
-    "org.gnome.Nautilus",
+    "com.thisisgm.flea",
     "brave-origin",
     "zapfast",
     "spotifast",
     "orca",
     "org.mozilla.Thunderbird",
     "steam",
-    "com.mitchellh.ghostty",
-    "com.thisisgm.flea"
+    "com.mitchellh.ghostty"
   ]
 }

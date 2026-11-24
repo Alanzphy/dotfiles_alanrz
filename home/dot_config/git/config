@@ -62,7 +62,7 @@
 	autoStash = true
 
 [credential]
-	helper = cache
+	helper = /usr/lib/git-core/git-credential-libsecret
 
 [credential "https://github.com"]
 	helper =

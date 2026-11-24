@@ -23,12 +23,8 @@
 -- Disable a default binding without replacing it.
 -- hl.unbind("SUPER + SHIFT + B")
 
--- Cycle only through the workspaces assigned to the focused monitor.
-hl.unbind("SUPER + TAB")
-hl.unbind("SUPER + SHIFT + TAB")
-local workspace_cycle = os.getenv("HOME") .. "/.config/hypr/workspace-cycle.sh"
-o.bind("SUPER + TAB", "Next workspace on this monitor", { launch = workspace_cycle .. " next" })
-o.bind("SUPER + SHIFT + TAB", "Previous workspace on this monitor", { launch = workspace_cycle .. " prev" })
+-- Change the XKB layout on all keyboards, including the Fcitx virtual keyboard.
+o.bind("SUPER + SHIFT + K", "Switch keyboard layout", "hyprctl switchxkblayout all next")
 
 -- Logitech MX Keys examples:
 -- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
@@ -36,3 +32,9 @@ o.bind("SUPER + SHIFT + TAB", "Previous workspace on this monitor", { launch = w
 -- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
 --
 --
+
+-- Dictation toggle from before Alt + Space and Right Alt became the defaults.
+-- Alt + Space belongs to omacast (hypr/omacast.lua); F9 is left to applications.
+if o.dictation_installed and o.dictation_installed() then
+  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
+end

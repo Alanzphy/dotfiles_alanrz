@@ -1,20 +1,23 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
     "layout": {
       "center": [
-        {
-          "id": "omarchy.weather"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
-        },
         {
           "format": "ddd d MMM h:mm AP",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
           "verticalFormat": "dddd\nd MMMM\nh:mm AP"
+        }
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
         },
+        {
+          "id": "omarchy.weather"
+        }
+      ],
+      "centerEnd": [
         {
           "id": "omarchy.system-update"
         },
@@ -34,20 +37,15 @@
           "iconStyle": "color",
           "id": "tornikegomareli.spaces",
           "perMonitor": true,
-          "persistentWorkspaces": 0,
+          "persistentWorkspaces": 5,
           "previewLive": false,
           "previewSize": "medium",
           "showApps": "all"
-        },
-        {
-          "id": "omarchy.indicators"
         }
       ],
       "right": [
         {
-          "hidden": [],
-          "id": "io.github.tyrichards.tray",
-          "showTrayIcons": true
+          "id": "omarchy.tray"
         },
         {
           "allowUnverifiedInstalls": true,
@@ -67,9 +65,20 @@
           "strokeWidth": 0
         },
         {
-          "id": "io.github.twiking.omasettings"
+          "id": "io.github.twiking.omacontrol",
+          "showActiveSwitchCount": false,
+          "showBatteryWarnings": false,
+          "showNetworkWarning": false
         },
         {
+          "hover": [
+            "uptime",
+            "load",
+            "bat",
+            "gpu",
+            "vram",
+            "net"
+          ],
           "id": "io.github.diegopluna.argus",
           "mangoHud": {
             "bgAlpha": 0.4,
@@ -99,19 +108,17 @@
           },
           "show": [
             "cpu",
-            "ram",
-            "cputemp"
+            "ram"
           ]
         },
         {
-          "id": "akitaonrails.ai-usagebar",
-          "barWindow": "session",
-          "lastSelectedEntryId": "opencode-go",
-          "showAll": true,
-          "showProvider": false
+          "id": "omarchy.agents"
         },
         {
           "id": "omarchy.tailscale"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
         },
         {
           "id": "omarchy.bluetooth"
@@ -127,8 +134,12 @@
         },
         {
           "id": "omarchy.power"
+        },
+        {
+          "id": "io.github.thisisgm.omapods"
         }
-      ]
+      ],
+      "tray": []
     },
     "position": "top",
     "transparent": true
@@ -137,8 +148,13 @@
     "ajkulundu.mediaplusplus"
   ],
   "disabledPlugins": [
-    "omarchy.media"
+    "omarchy.media",
+    "omarchy.dock"
   ],
+  "dock": {
+    "autohide": false,
+    "position": "left"
+  },
   "idle": {
     "lock": 900,
     "screensaver": 600
@@ -146,6 +162,9 @@
   "plugins": [
     {
       "id": "macos.dock"
+    },
+    {
+      "id": "typecraft.omacast"
     }
   ],
   "version": 1

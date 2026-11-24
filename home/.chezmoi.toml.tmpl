@@ -1,14 +1,6 @@
-{{- /* Regenerate local config; keep whatever data the templates need.
-       Key strategy: prefer env var, else prompt, else state (promptOnce). */ -}}
+{{- /* Regenerate local config; keep whatever data the templates need. */ -}}
 sourceDir = {{ joinPath .chezmoi.homeDir "Projects/dotfiles_alanrz" | quote }}
 encryption = "age"
-
-{{- $aiKey := "" }}
-{{- if stdinIsATTY }}
-{{-   $aiKey = promptStringOnce . "aiUsagebarApiKey" "API key para ai-usagebar (enter para saltar)" (env "OPENCODE_GO_API_KEY") }}
-{{- else }}
-{{-   $aiKey = env "OPENCODE_GO_API_KEY" }}
-{{- end }}
 
 # age: private key decrypted once from key.txt.age (passphrase) by
 # run_onchange_before_decrypt-private-key.sh.tmpl
@@ -19,9 +11,6 @@ encryption = "age"
 [data]
     os = {{ .chezmoi.os | quote }}
     hostname = {{ .chezmoi.hostname | quote }}
-
-[data.aiUsagebar]
-    apiKey = {{ $aiKey | quote }}
 
 [diff]
     exclude = ["scripts"]

@@ -7,11 +7,6 @@
       "enabled": true
     },
     {
-      "id": "akitaonrails.ai-usagebar",
-      "git": "https://github.com/akitaonrails/ai-usagebar.git",
-      "enabled": true
-    },
-    {
       "id": "b.everything",
       "git": "https://github.com/brianblakely/omarchy-everything.git",
       "enabled": false
