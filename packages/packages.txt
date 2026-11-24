@@ -1,6 +1,5 @@
 adobe-source-sans-fonts
 aether
-ai-usagebar-bin
 alacritty
 alsa-utils
 amd-ucode
@@ -36,6 +35,7 @@ dcraw
 ddcutil
 delta-bin
 discord
+dnsmasq
 docker
 docker-buildx
 docker-compose
@@ -120,6 +120,7 @@ libpulse
 libva-nvidia-driver
 libva-utils
 libvips
+libvirt
 libyaml
 limine
 linux-firmware
@@ -196,7 +197,9 @@ python-pipx
 python-poetry-core
 python-steam
 qbittorrent
+qemu-desktop
 qemu-system-x86
+qemu-ui-opengl
 qemu-user-static-binfmt
 qrencode
 qt-sudo
@@ -206,8 +209,10 @@ rebuild-detector
 recordly-bin
 ripgrep
 ripgrep-all
+rtkit
 ruby
 sddm
+seahorse
 slurp
 socat
 spotifast-bin
@@ -254,6 +259,8 @@ usage
 uwsm
 vdpauinfo
 vesktop-bin
+virglrenderer
+virt-manager
 virtiofsd
 visual-studio-code-bin
 vkd3d

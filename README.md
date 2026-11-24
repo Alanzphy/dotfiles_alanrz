@@ -44,7 +44,7 @@ P=~/.oh-my-zsh/custom/plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions $P/zsh-autosuggestions
 git clone https://github.com/Aloxaf/fzf-tab $P/fzf-tab
 git clone https://github.com/z-shell/F-Sy-H $P/F-Sy-H
-chsh -s /usr/bin/zsh                     # needs zsh, zsh-completions, thefuck pkgs
+chsh -s /usr/bin/zsh                     # needs zsh, zsh-completions pkgs
 
 # 1. restore Omarchy shell plugins (15; reads ~/.config/omarchy/plugin-manifest.json)
 ~/.config/omarchy/restore-plugins.sh
@@ -52,11 +52,7 @@ chsh -s /usr/bin/zsh                     # needs zsh, zsh-completions, thefuck p
 # 2. flea (file manager + shelf plugin): comes from a package, not a plugin clone
 omarchy pkg aur add flea-bin && flea --default
 
-# 3. keys: fill the 3 slots and never worry again
-#    ~/.config/hypr/envs.lua                       (TODO-REEMPLAZAR-KEY)
-#    ~/.config/environment.d/30-ai-usagebar.conf   (TODO-REEMPLAZAR-KEY)
-#    ~/.config/ai-usagebar/config.toml             (plugin re-chmods 600 itself)
-#    then: omarchy-restart-shell (hyprland re-read envs.lua = plugin config)
+# 3. keys: ~/.config/hypr/envs.lua is a create-once slot for private hl.env() vars
 
 # 4. theme (re-generates backgrounds/, themed/, shell updates)
 omarchy theme set "<your-theme>"
@@ -137,7 +133,7 @@ siguiente `chezmoi apply` (el script `run_after_` lo vuelve a quitar).
 ### Zsh (`~/.zshrc`, `~/.zsh/`)
 | File | What it holds |
 |------|-------------------------------|
-| `.zshrc` | Oh My Zsh (`sudo fzf zoxide ssh zsh-autosuggestions F-Sy-H fzf-tab`), history, keybindings, starship/thefuck/zoxide init, `~/.zsh/completions` in `fpath` |
+| `.zshrc` | Oh My Zsh (`sudo fzf ssh fzf-tab zsh-autosuggestions F-Sy-H`), 24 h `compinit` cache, history, keybindings, starship/zoxide init, `~/.zsh/completions` in `fpath` |
 | `.zsh/aliases.zsh` | personal aliases (git, docker, yt-dlp, eza/bat, pacman, `exegol` via pipx); sourced AFTER Oh My Zsh so they win |
 | `.zsh/env.zsh` | Omarchy defaults for zsh (`EDITOR`, `BROWSER`, `MANPAGER`…) + `~/.local/bin` in `PATH` |
 | `.zsh/starship.zsh` | distro icon → `STARSHIP_DISTRO` (used by `starship.toml`) |
@@ -176,7 +172,6 @@ they peg an entire core playing YouTube AV1 (origin of this audit).
 | `systemd/user/wallpaper-layer-top.{service,sh}` | raises waywallen video above omarchy shell background; watcher with 3 s debounce |
 | `waywallen/{config.toml, waywallen.conf}` | wallpaper engine config |
 | `git/config` | aliases (`lg`, `shove`…), identity |
-| `ai-usagebar/config.toml` (create_once) | plugin secrets slot + provider toggles |
 | `local/share/applications/f5vpn-ng.desktop` | launcher del VPN (`f5vpn-ng` viene de `packages.txt`). Los flags `GDK_BACKEND=x11` + `WEBKIT_DISABLE_DMABUF_RENDERER=1` evitan los crashes de WebKitGTK al abrir su login en Wayland; sin ellos la ventana no abre |
 | `claude/settings.json` | ajustes de Claude Code: hooks del plugin Spaces + `includeCoAuthoredBy: false` (sin co-autor en commits) |
 | `.omp/agent/config.yml` | ajustes de omp + la extensión del plugin Spaces (`extensions:`) |
@@ -198,6 +193,68 @@ Con `!debug` solo se genera el paquete real. Coste: `gdb` sin símbolos para
 paquetes AUR; para un backtrace puntual, recompilar ese paquete con
 `makepkg --config /etc/makepkg.conf`. Verificar tras un update:
 `pacman -Qq | grep -- -debug$` debe salir vacío.
+
+### Kali Linux VM (KVM/QEMU)
+
+La VM probada usa QXL + SPICE, sin OpenGL ni aceleración 3D, con 4 CPU,
+4096 MiB de RAM y un disco qcow2 de 40 GiB. Su red es `default` con NAT;
+`host-passthrough` está activado para la CPU. La ISO es la instalación AMD64
+oficial de Kali; no se guardan la ISO ni el disco de la VM en este repositorio.
+
+En el host Arch/Omarchy, los paquetes están en `packages.txt`. Tras instalarlos:
+
+```bash
+sudo systemctl enable --now libvirtd
+sudo virsh net-autostart default
+sudo virsh net-start default  # omitir si ya está activa
+```
+
+Con UFW habilitado, estas son las reglas usadas para DHCP, DNS y salida NAT
+por la interfaz Wi-Fi actual. Comprueba la interfaz y la subred antes de
+aplicarlas en otra máquina (`ip route` y `virsh net-dumpxml default`):
+
+```bash
+sudo ufw allow in on virbr0 to any port 67 proto udp
+sudo ufw allow in on virbr0 to 192.168.122.1 port 53 proto udp
+sudo ufw allow in on virbr0 to 192.168.122.1 port 53 proto tcp
+sudo ufw route allow in on virbr0 out on wlp7s0 from 192.168.122.0/24
+```
+
+La regla de salida permite Wi-Fi directo: **no obliga a usar F5 ni Tailscale**.
+No aplicarla si la VM debe salir exclusivamente por una VPN.
+
+En Kali con Xfce, el agente `spice-vdagent` y `xrandr`, instala los dos
+archivos desde una copia de este repositorio dentro de la VM:
+
+```bash
+install -Dm755 vm/kali/kali-display-100hz "$HOME/.local/bin/kali-display-100hz"
+install -Dm644 vm/kali/kali-display-100hz.desktop "$HOME/.config/autostart/kali-display-100hz.desktop"
+```
+
+El archivo `.desktop` guarda la ruta del usuario de esta VM (`/home/alan`):
+si el usuario es otro, cambia `Exec` por la ruta absoluta correspondiente.
+El script recrea el modo `Virtual-1` 1920 × 1080 a 99.90 Hz al iniciar sesión
+y reinicia `xfdesktop` para evitar un fondo parcialmente negro. Confirma el
+nombre de pantalla con `xrandr`; el modo es virtual y no garantiza 100 FPS.
+Si el cursor queda desfasado tras cambiar de resolución, se corrigió con
+`sudo systemctl restart spice-vdagentd`.
+
+En Virt-Manager, `View → Scale Display → Always` escala la imagen al tamaño
+de la ventana; no cambia la resolución de Kali. El redimensionado automático
+no funcionó en esta instalación: el repositorio Kali configurado no ofrecía
+`xserver-xorg-video-qxl`. Tampoco funcionó OpenGL/SPICE con la NVIDIA del host
+(`EGL_NOT_INITIALIZED`), por lo que 3D permanece desactivado.
+
+### System hardening & tuning (`system/`)
+
+Ajustes de sistema en `/etc/` fuera de `$HOME` (aplicables en una máquina nueva con `sudo ./system/apply.sh`):
+
+| File / Action | What it holds |
+|------|-------------------------------|
+| `system/etc/sysctl.d/99-hardening.conf` | `kernel.kptr_restrict = 2` y `fs.suid_dumpable = 0` |
+| `system/etc/udev/rules.d/61-hdd-bfq.rules` | scheduler `bfq` solo para discos rotacionales HDD (`rotational==1`), manteniendo `kyber` en NVMe/SSD |
+| `system/etc/systemd/journald.conf.d/10-size-limit.conf` | tope de logs `SystemMaxUse=1G` (~2.5 meses de historial) |
+| `system/apply.sh` | instala los 3 archivos de arriba, habilita `pam_gnome_keyring.so` en `/etc/pam.d/sddm` (auto-desbloqueo de `login.keyring`), restringe UFW (`53317` LocalSend y `1714:1764` KDE Connect) a redes privadas LAN + Tailscale con `ufw logging off`, y fija el perfil de energía en `balanced` |
 
 ### Packages (`packages/`)
 | File | What it holds |

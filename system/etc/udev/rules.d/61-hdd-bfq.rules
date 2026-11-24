@@ -1,0 +1,2 @@
+# Use BFQ scheduler on rotational HDDs (overrides kyber from 60-omarchy-io-scheduler.rules)
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", KERNEL=="sd*", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
