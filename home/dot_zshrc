@@ -15,13 +15,25 @@ typeset -U fpath
 plugins=(
   sudo
   fzf
-  zoxide
   ssh
+  fzf-tab
   zsh-autosuggestions
   # zsh-syntax-highlighting
   F-Sy-H
-  fzf-tab
 )
+
+# Reuse zcompdump for 24h (OMZ still forces a rebuild if OMZ updates or fpath changes)
+ZSH_COMPDUMP="${HOME}/.zcompdump-${HOST}-${ZSH_VERSION}"
+compinit() {
+  unfunction compinit
+  autoload -Uz compinit
+  local -a fresh=( ${ZSH_COMPDUMP}(Nmh-24) )
+  if (( ${#fresh} )); then
+    compinit -C -d "$ZSH_COMPDUMP"
+  else
+    compinit "$@"
+  fi
+}
 
 source "$ZSH/oh-my-zsh.sh"
 
@@ -57,10 +69,17 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # Interactive tools
 eval "$(starship init zsh)"
-eval "$(thefuck --alias)"
 eval "$(zoxide init --cmd cd zsh)"
 
 # Edit the current command line in the configured editor.
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
+
+# >>> oh-my-opencode-slim background subagents >>>
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+export OPENCODE_ENABLE_EXA=1
+# <<< oh-my-opencode-slim background subagents <<<
+
+# omp con perfil de agentes (overlay por invocación; `omp` sigue igual)
+alias ompf='omp --config "$HOME/.omp/perfiles/agente.yml"'

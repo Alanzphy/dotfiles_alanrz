@@ -43,7 +43,7 @@ alias ytv-best="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+besta
 alias big="expac -H M '%m\t%n' | sort -h | nl"
 alias pathpkg='yay -Ql'
 alias sysfailed='systemctl list-units --failed'
-alias uu='yay -Syyu'
+alias uu='yay -Syu'
 alias pacman='pacman --color auto'
 alias lpacman='bat /var/log/pacman.log'
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
@@ -61,7 +61,6 @@ alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
 
 # Editors for system configuration
 alias epacman='sudo $EDITOR /etc/pacman.conf'
-alias egrub='sudo $EDITOR /etc/default/grub'
 alias emkinitcpio='sudo $EDITOR /etc/mkinitcpio.conf'
 alias nfstab='sudo $EDITOR /etc/fstab'
 alias nhostname='sudo $EDITOR /etc/hostname'
@@ -71,7 +70,6 @@ alias ez='$EDITOR ~/.zshrc'
 # Clipboard and diagnostics
 alias audio="pactl info | grep 'Server Name'"
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias userlist='cut -d: -f1 /etc/passwd | sort'
 alias jctl='journalctl -p 3 -xb'
 alias myip='curl http://ipecho.net/plain; echo'

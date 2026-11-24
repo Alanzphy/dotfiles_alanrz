@@ -5,25 +5,37 @@
 # Casi todas las habilita Omarchy/Arch solas (sddm, NetworkManager, bluetooth, cups,
 # avahi, ufw, docker.socket, oomd, resolved, snapper, limine-snapper-sync, getty…).
 # ★ = fuera de esas: son las que hay que habilitar a mano en una máquina nueva:
-#   sudo systemctl enable --now tailscaled
-#   systemctl --user enable --now voxtype wallpaper-layer-top
+#   sudo systemctl enable --now tailscaled docker rtkit-daemon
+#   sudo systemctl enable libvirtd.socket libvirtd-ro.socket libvirtd-admin.socket virtlogd.socket virtlockd.socket
+#   sudo systemctl enable nvidia-suspend nvidia-hibernate nvidia-resume fstrim.timer
+#   systemctl --user enable --now librepods owed superwhisper wallpaper-layer-top dv-prep.path
 
 # ── sistema ──
 avahi-daemon.service
+avahi-daemon.socket
 bluetooth.service
 cups.path
-cups.service
+cups.socket
+★ docker.service
 docker.socket
+★ fstrim.timer
 getty@.service
+★ libvirtd-admin.socket
+★ libvirtd-ro.socket
+★ libvirtd.socket
 limine-snapper-sync.service
 linux-modules-cleanup.service
 NetworkManager-dispatcher.service
 NetworkManager.service
+★ nvidia-hibernate.service
+★ nvidia-resume.service
+★ nvidia-suspend.service
 paccache.timer
 power-profiles-daemon.service
 remote-fs.target
+★ rtkit-daemon.service
 sddm.service
-★ tailscaled.service
+snapper-cleanup.timer
 systemd-oomd.service
 systemd-oomd.socket
 systemd-resolved-monitor.socket
@@ -31,24 +43,29 @@ systemd-resolved-varlink.socket
 systemd-resolved.service
 systemd-timesyncd.service
 systemd-userdbd.socket
-avahi-daemon.socket
-cups.socket
-snapper-cleanup.timer
+★ tailscaled.service
 ufw.service
+★ virtlockd-admin.socket
+★ virtlockd.socket
+★ virtlogd-admin.socket
+★ virtlogd.socket
 
 # ── usuario ──
 bt-agent.service
+★ dv-prep.path
 gnome-keyring-daemon.socket
+★ librepods.service
 omarchy-crash-watch.service
 omarchy-fcitx5.service
 omarchy-migrate-notify.service
 omarchy-recover-internal-monitor.service
 omarchy-sleep-lock.service
+★ owed.service
 p11-kit-server.socket
 pipewire-pulse.service
 pipewire-pulse.socket
 pipewire.socket
-★ voxtype.service
+★ superwhisper.service
 ★ wallpaper-layer-top.service
 wireplumber.service
 xdg-user-dirs.service
